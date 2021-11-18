@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Great Number Game</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+</head>
+<body>
+    
+    <div class="container section">
+        <div class="row">
+            <div class="col m8 offset-m2">
+                <h2 class="center">Welcome to the Great Number Game!</h2>
+                <h4 class="center">I am thinking of a number between 1 and 100</h4>
+                <h4 class="center">Take a guess</h4>
+                <% if(result && !result.win ){ %>
+                    
+                    <div class="container section red white-text center" style="min-height: 150px;">
+                        <% if(result.high){ %> <h4 class="text-white center-align">Too high!</h4> <% } %>
+                        <% if (!result.high) { %> <h4 class="text-white center-align">Too low!</h4> <% } %>
+                    </div>
+                <% } %>
+
+                <% if(!result || !result.win ) { %>
+                <form action='/compare' method="get" class="col s6 offset-s3 center">
+                    <input type="number" name="guess">
+                    <input type="submit" class="btn">
+                </form>
+                
+                <% } %>
+
+                <% if(result && result.win ){ %>
+                    
+                    <div class="container section green white-text center" style="min-height: 150px;">
+                        <h4 class="text-white center-align"><%= result.number %> was the number!</h4>
+                        <a class="btn yellow darken-3 center-align" href="/restart">Play again!</a>
+                    </div>
+                <% } %>
+
+            </div>
+        </div>
+    </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>            
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="/main.js"></script>
+</body>
+</html>
